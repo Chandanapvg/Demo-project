@@ -1,0 +1,230 @@
+
+
+body {
+    font-family: "Poppins", serif
+}
+.header {
+    position: sticky;
+    top: 0%;
+    background-color:#FAFBFC;
+}
+.header__container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.header__list-content  {
+    list-style:none;
+    gap: 40px;
+    display: flex;
+
+    
+
+}
+.header__link{
+    text-decoration: none;
+    color: black;
+}
+.header__button-link {
+    background-color: #0070F0E5;
+    color: white;
+    border-radius: 30px;
+    padding: 11px 20px;
+}
+.banner {
+    background-color: #FAFBFC;
+    padding: 80px 0;
+}
+
+.banner__image-wrap {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 16px;
+}
+
+.banner__image-body {
+    padding: 32px;
+}
+
+ul{
+    padding-left: 0;
+}
+.banner__list{
+    list-style-type: none;
+    padding: 0;
+
+}
+.banner__list li::before {
+    content: url("../assests/checkmark.svg");
+    margin-right: 21px;
+}
+
+.banner__container {
+    display: flex;
+    /* margin-left: 148px; */
+    gap: 120px;
+
+}
+
+@media screen and (max-width: 767px) {
+    .banner__container {
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+    .banner__image {
+        width: 100%;
+    }
+}
+.banner__heading{
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 60px;
+    margin-bottom: 24px;
+
+    
+}
+.banner__list {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    
+}
+
+.banner__list li {
+    margin-bottom: 16px;
+
+}
+.banner__img-heading {
+    font-weight: 600;
+    font-size: 24px;
+    line-height:32px;
+}
+.fnt-16 {
+    font-size: 16px;
+    line-height: 24px;
+}
+.font-14 {
+     font-size: 14px;
+    line-height: 22px;
+    a
+.font-w-600 {
+    font-weight: 600;
+
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px ;
+}
+
+
+/* Gallery section */
+.gallery {
+    background-color:lightblue;
+    padding: 80px 0;
+}
+.gallery__list {
+    display:flex;
+    list-style: none;
+    gap: 4px 24px;
+    flex-wrap: wrap;
+
+
+
+
+}
+
+@media screen and (min-width: 768px) {
+.gallery__header {
+    display:flex;
+    align-items: center;
+    gap: 40px;
+
+}
+}
+.gallery__list a {
+    padding: 12px 24px;
+    font-weight:600;
+    color: #1F284F;
+    border:1px solid #B7BFC7;
+    background-color: white;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 30px;
+}
+.gallery__image-wrap {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    
+}
+.card__body {
+    padding: 24px;
+    background-color: white;
+    
+}
+
+.card {
+    width: 294px;
+    
+}
+@media screen and  (min-width: 768px) {
+    .card{
+        width: 250px;
+    }
+}
+@media screen and  (min-width: 991px) {
+    .card{
+        width: 350px;
+    }
+}
+
+
+
+
+.card__image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+}
+
+/* footer section */
+ 
+.footer__container {
+    display: flex;
+    gap: 80px;
+    
+}
+.footer__container-right {
+    display: flex;
+    gap: 95px;
+    
+}
+.footer__heading-content {
+    list-style: none;
+}
+.mt-0 {
+    margin-top: 0;
+}
+ .footer {
+    padding: 80px 0;
+    background-color: #FAFBFC;
+ }
+
+
+ .d-inline-block {
+    display: inline-block;
+ }
+
+ .footer__social-links {
+    width: 170px;
+    text-align: center;
+ }
+
+ .footer__link-icons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+ }
