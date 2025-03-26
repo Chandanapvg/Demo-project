@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function load() {
         cartDrawer.classList.add("open")
         let cartBody = cartDrawer.querySelector(".card-drawer__body")
         cartBody.replaceChildren();
-        cart=[1,2,3,4,5]
         cart.forEach(cartItem => {
             cartBody.insertAdjacentHTML("beforeend", `
                       <div class="card-drawer__body-content cart-item" product-id="${cartItem.id}" >
