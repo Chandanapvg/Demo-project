@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function load() {
-    
+
 
 
     const products = [
-        { id: 1, title: "Wireless Headphones",quantity:1, price: 99.99, imageUrl: "./assests/Group 120.png" },
-        { id: 2, title: "Gaming Mouse",quantity:1, price: 49.99, imageUrl: "./assests/Group 121.png" },
-        { id: 3, title: "Mechanical Keyboard",quantity:1, price: 129.99, imageUrl: "./assests/Group 122.png" },
-        { id: 4, title: "4K Monitor",quantity:1, price: 299.99, imageUrl: "./assests/Group 122.png" },
-        { id: 5, title: "Bluetooth Speaker",quantity:1, price: 79.99, imageUrl: "./assests/Group 116.png" }
+        { id: 1, title: "Wireless Headphones", quantity: 1, price: 99.99, imageUrl: "./assests/Group 120.png" },
+        { id: 2, title: "Gaming Mouse", quantity: 1, price: 49.99, imageUrl: "./assests/Group 121.png" },
+        { id: 3, title: "Mechanical Keyboard", quantity: 1, price: 129.99, imageUrl: "./assests/Group 122.png" },
+        { id: 4, title: "4K Monitor", quantity: 1, price: 299.99, imageUrl: "./assests/Group 122.png" },
+        { id: 5, title: "Bluetooth Speaker", quantity: 1, price: 79.99, imageUrl: "./assests/Group 116.png" }
     ];
 
     let cart = [
@@ -15,49 +15,50 @@ document.addEventListener("DOMContentLoaded", function load() {
 
 
     //Cart button click
-    
+
     let addToCartBtn = document.querySelectorAll(".add-to-cart-btn")
     addToCartBtn.forEach(button => {
         button.addEventListener("click", addToCart)
     })
+   
+    
 
     function addToCart(event) {
-        console.log(event.target);
+        let productId = event.target.getAttribute("product-id")
+        let updateCartArray = true;
         
-        let productId = event.target.getAttribute("product-id") 
-       let updateCartArray = true;
 
-       // checks product already exit in cart
-      cart.filter(cartItem=> {
-        if(cartItem.id == productId){
-            cartItem.quantity +=1;
-            updateCartArray = false;
-            console.log(cart)
-        }
+        // checks product already exit in cart
+        cart.filter(cartItem => {
+            if (cartItem.id == productId) {
+                cartItem.quantity += 1;
+                updateCartArray = false;
+                
+            }
         })
-       
 
-        if(updateCartArray){
+
+        if (updateCartArray) {
             products.filter(product => {
-                if(product.id == productId) {
+                if (product.id == productId) {
                     cart.push(product)
                 }
-                
+
             })
 
         }
-        
+        activeCartDrawer();
     }
 
-    function activeCartDrawer(e) {
-        e.preventDefault();
+    function activeCartDrawer() {
         let cartDrawer = document.querySelector(".card-drawer")
         cartDrawer.classList.add("open")
         let cartBody = cartDrawer.querySelector(".card-drawer__body")
         cartBody.replaceChildren();
-          cart.forEach(cartItem => {
-            cartBody.insertAdjacentHTML("beforeend",`
-                      <div class="card-drawer__body-content cart-item" >
+        cart=[1,2,3,4,5]
+        cart.forEach(cartItem => {
+            cartBody.insertAdjacentHTML("beforeend", `
+                      <div class="card-drawer__body-content cart-item" product-id="${cartItem.id}" >
     
                             <div class="card-drawer__item">
                                 <img src="${cartItem.imageUrl}" alt="">
@@ -76,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function load() {
                                     </div>
                                 </div>
     
-                                <div class="card-drawer__quantity" product-id="${cartItem.id}">
+                                <div class="card-drawer__quantity" >
                                     <div class="card-drawer__quantity-wrapper" >
                                         <button action-type="decrement" class="card-drawer__quantity-decriment">-</button>
                                         <input class="card-drawer__quantity-value" type="number" value="${cartItem.quantity}" readonly>
@@ -86,28 +87,53 @@ document.addEventListener("DOMContentLoaded", function load() {
     
                                     </div>
                                     <div class="card-drawer__quantity-price">
-                                        <span>$ ${ cartItem.price * cartItem.quantity }</span>
+                                        <span>$ ${(cartItem.price * cartItem.quantity).toFixed(2)}</span>
                                     </div>
                                 </div>
     
                             </div>
     
                         </div>`)
-
+           
         })
 
+        updateTotal();
+    
         let plusButtons = document.querySelectorAll(".card-drawer__quantity-incriment")
 
 
-    plusButtons.forEach(button => {
-        button.addEventListener("click", cardQuantityIncrimentDecrement)
-    })
+        plusButtons.forEach(button => {
+            button.addEventListener("click", cardQuantityIncrimentDecrement)
+        })
+
         let minusButtons = document.querySelectorAll(".card-drawer__quantity-decriment")
         minusButtons.forEach(button => {
             console.log(button)
             button.addEventListener("click", cardQuantityIncrimentDecrement)
         })
+
+        let deleteButtons = document.querySelectorAll(".btn-delete")
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", deleteCartItem)
+        })
     }
+
+    function updateTotal(){
+        let total = 0;
+        cart.forEach(item => {
+           total += item.quantity * item.price
+        })
+        document.querySelector(".cart-drawer-total").innerHTML = "$" + total.toFixed(2)
+    }
+    function deleteCartItem(e) {
+        
+       let parentElement = e.target.closest(".cart-item")
+       let deleteItemId = parseInt(parentElement.getAttribute("product-id"))
+        let indexValue = cart.findIndex(item => item.id == deleteItemId) 
+        cart.splice(indexValue,1)
+        activeCartDrawer();
+    }
+
 
     let cardBtn = document.querySelector(".header__cart-btn")
     cardBtn.addEventListener("click", activeCartDrawer)
@@ -119,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function load() {
     }
 
     let clsBtn = document.querySelector(".cart-close-button")
-   
+
 
     clsBtn.addEventListener("click", closeCartDrawer)
 
@@ -128,40 +154,39 @@ document.addEventListener("DOMContentLoaded", function load() {
 
 
     function cardQuantityIncrimentDecrement(e) {
-        let actionType = e.target.getAttribute("action-type");
-        let parentElement = e.target.closest(".card-drawer__quantity");
+        let actionType = e.target.getAttribute("action-type");  
+        let parentElement = e.target.closest(".cart-item");
         let inputEle = parentElement.querySelector(".card-drawer__quantity-value")
-    
 
-          let incrementDecrementValue = 1
-          if (actionType != "increment") {
-              incrementDecrementValue = -1
-          }
-          let updatedValue = parseInt(inputEle.value) + incrementDecrementValue
-         
-          let priceElement = parentElement.querySelector(".card-drawer__quantity-price span")
-          let productId = parseInt(parentElement.getAttribute("product-id"))
+
+        let incrementDecrementValue = 1
+        if (actionType != "increment") {
+            incrementDecrementValue = -1
+        }
+
         
-         let productObj = products.filter(product => {
-        
-              if(product.id == productId) {
-                  return product
-              }
-          })
-          
-          if(updatedValue >= 1) {
+        let updatedValue = parseInt(inputEle.value) + incrementDecrementValue
+
+        let priceElement = parentElement.querySelector(".card-drawer__quantity-price span")
+        let productId = parseInt(parentElement.getAttribute("product-id"))
+
+        let productObj = cart.filter(product => {
+            if (product.id == productId) {
+                product.quantity = updatedValue
+                return product
+            }
+        })
+
+        if (updatedValue >= 1) {
             inputEle.value = updatedValue
-          let value = productObj[0].price * updatedValue
-          priceElement.innerHTML = "$ "+ parseFloat(value).toFixed(2)
-      
-          }
+            let value = productObj[0].price * updatedValue
+            priceElement.innerHTML = "$ " + parseFloat(value).toFixed(2)
+            updateTotal();
 
-     
+        }
+
     }
-
-
 
 })
 
 
- 

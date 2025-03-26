@@ -1,17 +1,23 @@
 .h3 {
     text-align: center;
 }
+
 .h4 {
     font-size: 20px;
     line-height: 24px;
     margin: 0;
 }
+
 .h5 {
     font-size: 16px;
     line-height: 20px;
     margin: 0;
     margin-top: 12px;
-    color:#ADADAE;
+    color: #ADADAE;
+}
+
+button {
+    cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
@@ -22,10 +28,11 @@
 
 
 }
+
 .cart-close-button {
     border: none;
-    background-color: transparent ;
-    
+    background-color: transparent;
+
 }
 
 .card-drawer__overlay {
@@ -38,7 +45,7 @@
     bottom: 0;
     z-index: 9;
     opacity: 0;
-    transition: 0.3s ease opacity;
+    transition: 0.5s ease opacity;
     visibility: hidden;
 }
 
@@ -52,7 +59,7 @@
     bottom: 0;
     z-index: 10;
     transform: translateX(100%);
-    transition: 0.3s ease transform;
+    transition: 0.5s ease transform;
     visibility: hidden;
     padding: 28px;
 }
@@ -61,48 +68,73 @@
 .card-drawer.open .card-drawer__overlay {
     opacity: 1;
     visibility: visible;
-    
+
 }
+
 .card-drawer.open .card-drawer__container {
     transform: translateX(0);
     visibility: visible;
-    
+
 }
+
 .card-drawer__header {
     display: flex;
     justify-content: space-between;
 }
+
 .card-drawer__quantity-value {
     width: 46px;
     height: 32px;
 }
+
 .card-drawer__body-content {
     display: flex;
-    gap:15px;
+    gap: 15px;
     align-items: center;
 }
+
 .card-drawer__item-desc {
     display: flex;
     justify-content: space-between;
 }
+
 .card-drawer__quantity {
     display: flex;
     justify-content: space-between;
     margin-top: 12px;
 }
+
 .card-drawer__item-body {
     flex: 1;
 }
-.card-drawer__quantity-decriment , .card-drawer__quantity-incriment , .card-drawer__quantity-value {
+
+.card-drawer__quantity-decriment,
+.card-drawer__quantity-incriment,
+.card-drawer__quantity-value {
     border: none;
     background-color: var(--grey);
     font-weight: 700;
-    
+
 }
-.card-drawer__quantity-decriment , .card-drawer__quantity-incriment {
+
+.card-drawer__quantity-decriment,
+.card-drawer__quantity-incriment {
     width: 32px;
     height: 32px;
 }
+
+.card-drawer__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 28px;
+    background-color: var(--grey);
+}
+
 .btn-delete {
     background-color: transparent;
     border: none;
@@ -111,16 +143,19 @@
     padding: 0;
 
 }
+
 .card-drawer__quantity-price span {
     font-size: 16px;
     line-height: 42px;
     font-weight: 400;
 }
+
 .card-drawer__item img {
-    width:122px;
+    width: 122px;
     height: 162px;
     object-fit: contain;
 }
+
 .close-button {
     padding: 0;
 }
